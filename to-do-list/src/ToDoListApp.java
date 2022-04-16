@@ -2,18 +2,19 @@ import java.util.Scanner;
 
 public class ToDoListApp {
 
-    Scanner scan = new Scanner(System.in);
-    Item item = new Item();
+    Scanner scan;
+    ToDoList toDoList;
 
     public static void main(String[] args) {
-	 ToDoListApp toDoList = new ToDoListApp();
-	 toDoList.run();
+	 Scanner scanner = new Scanner(System.in);
+	 ToDoList toDoList = new ToDoList();
+	 ToDoListApp toDoListApp = new ToDoListApp();
+	 toDoListApp.run();
     }
 
     private void run() {
         welcome();
         buildList();
-        markItemAsComplete();
     }
 
     private void welcome() {
@@ -23,22 +24,22 @@ public class ToDoListApp {
 
     public void buildList() {
         for (int i = 0; i < 1000; i++) {
-            System.out.println("Do you want to add an item to the list?");
+            System.out.println("Do you want to add an toDoList to the list?");
             System.out.println("Type Y for Yes or N for No");
 
             String choice = scan.nextLine();
             if (choice.equalsIgnoreCase("y")) {
-                System.out.println("Add new item below:");
-                String newItem = item.readItem();
-                item.addItemToList(newItem);
+                System.out.println("Add new toDoList below:");
+                String taskEntered = scan.nextLine();
+                toDoList.addNewTaskToList(taskEntered);
                 System.out.println("-------------------------------");
                 System.out.println("Things to do:");
-                item.getAllItems();
+                toDoList.getAllTasks();
                 System.out.println("-------------------------------");
             } else if (choice.equalsIgnoreCase("n")) {
                 System.out.println("-------------------------------");
                 System.out.println("Things to do:");
-                item.getAllItems();
+                toDoList.getAllTasks();
                 break;
             } else {
                 System.out.println("Not a valid option.");
@@ -46,22 +47,7 @@ public class ToDoListApp {
         }
     }
 
-    public void markItemAsComplete(){
-            System.out.println("Are any items now complete? Please select using the number in the list");
-            int itemNumber = scan.nextInt();
-            item.getOneItem(itemNumber-1);
-            System.out.println("Is this complete?");
-            System.out.println("Type Y for Yes or N for No");
 
-            String choice = scan.nextLine();
-            if(choice.equalsIgnoreCase("y")){
-                item.setComplete();
-                item.removeItem(itemNumber);
-                item.getAllItems();
-            } else {
-                System.out.println("Not a valid option.");
-        }
-    }
 
 
 }
